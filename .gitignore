@@ -1,0 +1,19 @@
+# Ignore compiled executables
+*.exe
+
+# Ignore object files
+*.o
+
+# Ignore debug and build files
+*.out
+*.a
+*.so
+*.dll
+*.dSYM/
+
+# Ignore editor/IDE-specific files
+*.log
+*.swp
+*.swo
+.vscode/
+.idea/
