@@ -1,43 +1,44 @@
-#include <stdio.h>
-#include <math.h>
-float f(float x); // Function declaration before usage
-
-int main(){
-    float a,b,x,h,t;
-    printf("Enter the values for a and b: ");
+#include<stdio.h>
+#include<math.h>
+ int main()
+ {
+    float a,b,tol,m,h;
+    int i=0;
+    float f(float);
+    printf("enter the interval [a,b] \n");
     scanf("%f%f",&a,&b);
-
-    if(f(a) * f(b) == 0){
-        if(f(a) == 0)
-            printf("Root is %f\n",a);
+    if(f(a)*f(b)==0){
+        if(f(a)==0)
+            printf("%f is a root of f(x)\n",a);
         else
-            printf("Root is %f\n",b);
+            printf("%f is a root of f(x)\n",b);
+    }
+    else if(f(a)*f(b)<0){
+     printf("Enter the tolerance \n");
+     scanf("%f",&tol);
+     while(1){
+             i++;
+  h=fabs(a-b);
+  m=(a+b)/2;
+  if(f(a)*f(m)<0) b=m;
+  else a=m;
+  if(h<tol) break;
+     }
+     printf("%f is an approximate root of f(x)\n",m);
+     printf("Functional value of f(x)at %f is %f\n",m,f(m));
+     printf("Number of iteration is %d\n",i);
+    }
+    else printf("f may not have a root in the interval");
+    return 0;
+ }
+ float f(float x)
+ {
+    return (pow(x,3)-x-1);
+ }
 
-    }
-    else if(f(a) * f(b) >0){
-       printf("The given points are not suitable.\n");
-    }
-    else{
-        printf("Enter the tolerance:");
-        scanf("%f", &t);
-         // Bisection Method logic
-         do{
-            x=(a+b)/2.0;
-            if(f(x) * f(a) >0){
-              a=x;
-            }
-            else{
-                b=x;
-            }
-            h=fabs(a-b);
-         }
-         while(h>t);
-        printf("Root is %f and f(%f) = %f\n", x, x, f(x));
-    }
-}
 
-//sub function
-float f(float x){
-     return pow(x, 3) + 2 * x -3;
-}
+ // This program can find a root of given equation by bisection method.
+    // Given equation is : x3-x-1=0
+
+
 
