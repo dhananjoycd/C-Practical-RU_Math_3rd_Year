@@ -55,3 +55,27 @@ int main()
 
     return 0;
 }
+
+
+/*
+Enter initial guess x =
+0.5
+Enter tolerance: 0.0001
+
+ Iteration results:
+Iteration          x
+1       0.816497
+2       0.741964
+3       0.757671
+4       0.754278
+5       0.755007
+6       0.754850
+7       0.754884
+
+ Approximate root = 0.754884
+The functional value f(0.754884) = 0.000019
+Total iterations = 7
+
+Process returned 0 (0x0)   execution time : 33.668 s
+Press any key to continue.
+*/

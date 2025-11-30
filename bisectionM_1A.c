@@ -37,8 +37,20 @@
  }
 
 
- // This program can find a root of given equation by bisection method.
+ /* This program can find a root of given equation by bisection method.
     // Given equation is : x3-x-1=0
 
+----------out put---------
+enter the interval [a,b]
+1 2
+Enter the tolerance
+0.0001
+1.324738 is an approximate root of f(x)
+Functional value of f(x)at 1.324738 is 0.000084
+Number of iteration is 15
 
+Process returned 0 (0x0)   execution time : 11.111 s
+Press any key to continue.
+-----------------------------------
+*/
 

@@ -6,7 +6,7 @@ float f(float x){
 }
 
 int main() {
-    float a, b, m, tol, h f(float x);
+    float a, b, m, tol, h;
     int i = 0, max_iteration = 1000;
 
     printf("Enter interval [a, b]: ");
@@ -58,3 +58,14 @@ int main() {
 
     return 0;
 }
+/*
+Enter interval [a, b]: 2 3
+Enter tolerance: 0.001
+Approximate Root = 2.094306
+f(2.094306) = -0.002745
+Iterations = 6
+
+Process returned 0 (0x0)   execution time : 7.000 s
+Press any key to continue.
+
+*/

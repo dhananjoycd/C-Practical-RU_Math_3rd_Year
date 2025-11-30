@@ -35,3 +35,12 @@ int main() {
 
     return 0;
 }
+
+/*
+Enter the initial point: 2
+Enter the tolerance: 0.001
+The Real Root is 2.279019 and f(2.279019) = 0.000001
+
+Process returned 0 (0x0)   execution time : 37.994 s
+Press any key to continue.
+*/
