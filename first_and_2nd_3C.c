@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 
-int fact(int n) {
-    int f = 1;
-    for (int i = 1; i <= n; i++) f *= i;
-    return f;
-}
-
 int main() {
     int n, i, j;
     float x[50], y[50], d[50][50];

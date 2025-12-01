@@ -25,12 +25,17 @@ EXPECTED OUTPUT
 ```c
 #include<stdio.h>
 #include<math.h>
+
+ float f(float x)
+ {
+    return (pow(x,3)-x-1);
+ }
+
  int main()
  {
     float a,b,tol,m,h;
     int i=0;
-    float f(float);
-    printf("enter the interval [a,b] \n");
+    printf("Enter the interval [a,b]: ");
     scanf("%f%f",&a,&b);
     if(f(a)*f(b)==0){
         if(f(a)==0)
@@ -56,17 +61,13 @@ EXPECTED OUTPUT
     else printf("f may not have a root in the interval");
     return 0;
  }
- float f(float x)
- {
-    return (pow(x,3)-x-1);
- }
 
  /* This program can find a root of given equation by bisection method.
     // Given equation is : x3-x-1=0
 
 ----------out put---------
-enter the interval [a,b]
-1 2
+Enter the interval [a,b]: 1 2
+
 Enter the tolerance
 0.0001
 1.324738 is an approximate root of f(x)
@@ -77,10 +78,26 @@ Process returned 0 (0x0)   execution time : 11.111 s
 Press any key to continue.
 -----------------------------------
 */
+
+
+/*Solve hints:
+
+-Sub function build
+-Main Function build:
+        .variable declaration and take interval value
+        .check the root by using "if"
+         => f(a)*f(b)=0 then we can find root 'a' or 'b'
+         => f(a)*f(b)<0 then need tolerance and use "while loop"
+         Here, m =(a+b)/2 => f(a)*f(m)<0 b=m else a=m
+         Now check, h=fabs(a-b)<tolerance to stop the loop
+-Print OutPut
+
+*/
+
 ```
 
 1(b) This program can find a root of given equation by
-false position method. Given equation is : x3-2x-5=0
+**false position method**. Given equation is : x3-2x-5=0
 
 ```c
 #include <stdio.h>
@@ -155,10 +172,26 @@ Process returned 0 (0x0)   execution time : 7.000 s
 Press any key to continue.
 
 */
+
+/*Solve hints:
+
+-Sub function build
+-Main Function build:
+        .variable declaration and take interval value
+        .check the root by using "if"
+         => f(a)*f(b)=0 then we can find root 'a' or 'b'
+         => f(a)*f(b)>0 no real root
+         => then need tolerance and use "do while loop"
+         Here, m =((a * f(b) - b * f(a)) / (f(b) - f(a)) and  h=fabs(m-a)
+        Thus, f(a)*f(m)>0 a=m else b=m then i++ and check i>max iteration
+         Now check, h>tolerance to stop the loop
+-Print OutPut
+
+*/
 ```
 
 1(c) This program can find a root of given equation by
-Newton Raphsan method. Given equation is : x3-3x-5=0
+**Newton Raphsan method**. Given equation is : x3-3x-5=0
 
 ```c
 #include <stdio.h>
@@ -211,7 +244,7 @@ Press any key to continue.
 ```
 
 1(d) This program can find a root of given equation by
-Iteration method. Given equation is : x3+x2-1=0
+**Iteration method**. Given equation is : x3+x2-1=0
 
 ```c
 #include <stdio.h>
@@ -586,11 +619,6 @@ Press any key to continue.
 #include <stdio.h>
 #include <math.h>
 
-float fact(int n) {
-    float f = 1;
-    for(int i=1; i<=n; i++) f *= i;
-    return f;
-}
 
 int main() {
     int n, i, j;
@@ -680,12 +708,6 @@ Press any key to continue.
 #include <stdio.h>
 #include <math.h>
 
-int fact(int n) {
-    int f = 1;
-    for (int i = 1; i <= n; i++) f *= i;
-    return f;
-}
-
 int main() {
     int n, i, j;
     float x[50], y[50], d[50][50];
@@ -773,12 +795,6 @@ First Derivative & 2nd Derivative
 ```c
 #include <stdio.h>
 #include <math.h>
-
-int fact(int n) {
-    int f = 1;
-    for (int i = 1; i <= n; i++) f *= i;
-    return f;
-}
 
 int main() {
     int n, i, j;

@@ -69,3 +69,34 @@ Process returned 0 (0x0)   execution time : 7.000 s
 Press any key to continue.
 
 */
+
+/*Solve hints:
+
+-Sub function build
+-Main Function build:
+        .variable declaration and take interval value
+        .check the root by using "if"
+         => f(a)*f(b)=0 then we can find root 'a' or 'b'
+         => f(a)*f(b)>0 no real root
+         => then need tolerance and use "do while loop"
+         Here, m =((a * f(b) - b * f(a)) / (f(b) - f(a)) and  h=fabs(m-a)
+        Thus, f(a)*f(m)>0 a=m else b=m then i++ and check i>max iteration
+         Now check, h>tolerance to stop the loop
+-Print OutPut
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

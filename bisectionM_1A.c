@@ -1,11 +1,16 @@
 #include<stdio.h>
 #include<math.h>
+
+ float f(float x)
+ {
+    return (pow(x,3)-x-1);
+ }
+
  int main()
  {
     float a,b,tol,m,h;
     int i=0;
-    float f(float);
-    printf("enter the interval [a,b] \n");
+    printf("Enter the interval [a,b]: ");
     scanf("%f%f",&a,&b);
     if(f(a)*f(b)==0){
         if(f(a)==0)
@@ -31,18 +36,13 @@
     else printf("f may not have a root in the interval");
     return 0;
  }
- float f(float x)
- {
-    return (pow(x,3)-x-1);
- }
-
 
  /* This program can find a root of given equation by bisection method.
     // Given equation is : x3-x-1=0
 
 ----------out put---------
-enter the interval [a,b]
-1 2
+Enter the interval [a,b]: 1 2
+
 Enter the tolerance
 0.0001
 1.324738 is an approximate root of f(x)
@@ -54,3 +54,17 @@ Press any key to continue.
 -----------------------------------
 */
 
+
+/*Solve hints:
+
+-Sub function build
+-Main Function build:
+        .variable declaration
+        .check the root by using "if"
+         => f(a)*f(b)=0 then we can find root 'a' or 'b'
+         => f(a)*f(b)<0 then need tolerance and use "while loop"
+         Here, m =(a+b)/2 => f(a)*f(m)<0 b=m else a=m
+         Now check, h=fabs(a-b)<tolerance to stop the loop
+-Print OutPut
+
+*/
