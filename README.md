@@ -199,12 +199,12 @@ Press any key to continue.
 
 // Function definition for f(x)
 float f(float x) {
-    return pow(x, 3) - 3 * x - 5;
+    return (sin(x)-x/2);
 }
 
 // Function definition for f'(x)
 float df(float x) {
-    return 3 * pow(x, 2) - 3;
+    return cos(x)-0.5;
 }
 
 int main() {
@@ -215,7 +215,7 @@ int main() {
 
     if (df(x) == 0) {
         printf("The given point is not suitable.\n");
-        exit(0);
+        return 0;
     }
 
     printf("Enter the tolerance: ");
@@ -233,13 +233,15 @@ int main() {
 }
 
 /*
-Enter the initial point: 2
-Enter the tolerance: 0.001
-The Real Root is 2.279019 and f(2.279019) = 0.000001
+Enter the initial point: 1.5708
+Enter the tolerance: .0001
+The Real Root is 1.895494 and f(1.895494) = 0.000000
 
-Process returned 0 (0x0)   execution time : 37.994 s
+Process returned 0 (0x0)   execution time : 28.031 s
 Press any key to continue.
+
 */
+
 
 ```
 
