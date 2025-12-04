@@ -2,16 +2,13 @@
 #include <math.h>
 
 // Function to compute p(p-1)(p-2).../n!
-float F(float p, int n)
-{
-    float num = 1;
-    for (int i = 0; i < n; i++)
-        num *= (p - i);
+float F(float p, int n){
 
-    float fact = 1;
-    for (int i = 1; i <= n; i++)
-        fact *= i;
-
+    float num = 1, fact = 1;
+    for (int i = 0; i < n; i++){
+    num *= (p - i);
+    fact *= i+1;
+}
     return num / fact;
 }
 
@@ -61,7 +58,7 @@ int main()
     {
         printf("%2d   ", i); // index printing
         for (int j = 0; j < n - i; j++)
-            printf("%8.4f ", d[i][j]);
+            printf("%8.4f ", d[i][j]);  //print y
         printf("\n");
     }
 

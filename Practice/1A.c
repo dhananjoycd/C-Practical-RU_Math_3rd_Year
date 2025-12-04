@@ -38,14 +38,14 @@ int main()
     scanf("%f", &tol);
 
     printf("\n Iteration results:\n");
-    printf("Iteration \t   x\n");
+    printf("Iteration \t x\n");
 
     do
     {
         i++;
         x1 = g(x);
-        h = fabs(x1 - x);
-        printf("%d\t%f\n", i, x1);
+        h = fabs(x - x1);
+        printf("%d\t    %f\n", i, x1);
         x = x1;
     } while (h > tol);
 
