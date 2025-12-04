@@ -2,19 +2,14 @@
 #include <math.h>
 
 // Function to compute p(p+1)(p+2)... / n!
-float B(float p, int n)
-{
-    float num = 1;
-    for (int i = 0; i < n; i++)
-        num *= (p + i);
-
-    float fact = 1;
-    for (int i = 1; i <= n; i++)
-        fact *= i;
-
+float B(float p, int n){
+    float num = 1, fact = 1;
+    for (int i = 0; i < n; i++){
+    num *= (p - i);
+    fact *= i+1;
+}
     return num / fact;
 }
-
 int main()
 {
     int n;
@@ -76,8 +71,6 @@ int main()
 
     return 0;
 }
-
-
 
 /*
 Enter number of data points: 8
