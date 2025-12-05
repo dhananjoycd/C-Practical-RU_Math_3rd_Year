@@ -28,8 +28,8 @@ int main(){
 
         do{
             i++;
-            m = (a*f(b)-b*f(a))/(f(b)-f(a));
-            h = fabs(m-a);
+            m = (a*f(b)-b*f(a))/(f(b)-f(a));  // midpoint
+            h = fabs(m-a);                  // interval length
 
             if(f(a) * f(m) < 0)
                 b = m;
@@ -48,15 +48,3 @@ int main(){
 
     return 0;
 }
-
-/*
-Enter Interval [a b]: 2 3
-Enter Tolerance:
-0.001
-The root of f(x) is 2.094306
-Functional value of f(x) is -0.002745
-Number of iteration is 6
-
-Process returned 0 (0x0)   execution time : 5.095 s
-Press any key to continue.
-*/

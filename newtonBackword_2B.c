@@ -2,36 +2,44 @@
 #include <math.h>
 
 // Function to compute p(p+1)(p+2)... / n!
-float B(float p, int n){
+float B(float p, int n)
+{
     float num = 1, fact = 1;
     for (int i = 0; i < n; i++){
-    num *= (p - i);
-    fact *= i+1;
-}
+        num *= (p + i);
+        fact *= i+1;
+    }
+
     return num / fact;
 }
+
 int main()
 {
     int n;
-    float x0, h, xp, p;
+    float x, h, xp, p;
     float y[20][20], xv[20], sum;
 
     printf("Enter number of data points: ");
     scanf("%d", &n);
 
     printf("Enter initial x value: ");
-    scanf("%f", &x0);
+    scanf("%f", &x);
 
     printf("Enter common difference h: ");
     scanf("%f", &h);
 
-    // Generate x-values
-    for (int i = 0; i < n; i++)
-        xv[i] = x0 + i * h;
 
     printf("Enter y values:\n");
     for (int i = 0; i < n; i++)
         scanf("%f", &y[i][0]);
+
+    printf("\nEnter value of x to interpolate: ");
+    scanf("%f", &xp);
+
+
+    // Generate x-values
+    for (int i = 0; i < n; i++)
+        xv[i] = x + i * h;
 
     // Build backward difference table (row-wise)
     for (int col = 1; col < n; col++)
@@ -58,9 +66,6 @@ int main()
     }
 
     // Interpolation
-    printf("\nEnter value of x to interpolate: ");
-    scanf("%f", &xp);
-
     p = (xp - xv[n - 1]) / h;  // backward p
     sum = y[n - 1][0];         // last y
 
@@ -71,6 +76,8 @@ int main()
 
     return 0;
 }
+
+
 
 /*
 Enter number of data points: 8

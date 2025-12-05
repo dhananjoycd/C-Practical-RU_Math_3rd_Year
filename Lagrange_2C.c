@@ -3,8 +3,7 @@
 
 int main() {
     int n, i, j;
-    float x[100], y[100], xp;
-    float yp = 0, p;
+    float x[100], y[100], xp, yp = 0, p;
 
     printf("Enter number of data points: ");
     scanf("%d", &n);

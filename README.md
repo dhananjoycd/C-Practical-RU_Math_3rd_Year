@@ -23,81 +23,79 @@ EXPECTED OUTPUT
 1(a) - The problem we are solving is known as the **"Bisection Method for Finding Roots"**.
 
 ```c
-#include<stdio.h>
-#include<math.h>
 
- float f(float x)
- {
-    return (pow(x,3)-x-1);
- }
+#include <stdio.h>
+#include <math.h>
 
- int main()
- {
-    float a,b,tol,m,h;
-    int i=0;
-    printf("Enter the interval [a,b]: ");
-    scanf("%f%f",&a,&b);
-    if(f(a)*f(b)==0){
-        if(f(a)==0)
-            printf("%f is a root of f(x)\n",a);
+float f(float x){
+    return (pow(x,3) - x - 1);
+}
+
+int main(){
+    float a, b, h, t, m;
+    int i = 0;
+
+    printf("Enter Interval [a b]: ");
+    scanf("%f%f", &a, &b);
+
+    // Check if any endpoint is exactly a root
+    if(f(a) * f(b) == 0){
+        if(f(a) == 0)
+            printf("The root of f(x) is %f\n", a);
         else
-            printf("%f is a root of f(x)\n",b);
+            printf("The root of f(x) is %f\n", b);
+
+        return 0;
     }
-    else if(f(a)*f(b)<0){
-     printf("Enter the tolerance \n");
-     scanf("%f",&tol);
-     while(1){
-             i++;
-  h=fabs(a-b);
-  m=(a+b)/2;
-  if(f(a)*f(m)<0) b=m;
-  else a=m;
-  if(h<tol) break;
-     }
-     printf("%f is an approximate root of f(x)\n",m);
-     printf("Functional value of f(x)at %f is %f\n",m,f(m));
-     printf("Number of iteration is %d\n",i);
+
+    // Check sign change
+    if(f(a) * f(b) < 0){
+        printf("Enter Tolerance: \n");
+        scanf("%f", &t);
+
+        do{
+            i++;
+
+            m = (a + b) / 2;      // midpoint
+            h = fabs(b - a);      // interval length
+
+            if(f(a) * f(m) < 0)
+                b = m;
+            else
+                a = m;
+
+        } while(h > t);
+
+        printf("The root of f(x) is %f\n", m);
+        printf("Functional value of f(x) is %f\n",f(m));
+        printf("Number of iteration is %d\n",i);
     }
-    else printf("f may not have a root in the interval");
+    else{
+        printf("The root is not possible in this interval.\n");
+    }
+
     return 0;
- }
+}
 
- /* This program can find a root of given equation by bisection method.
-    // Given equation is : x3-x-1=0
 
-----------out put---------
-Enter the interval [a,b]: 1 2
-
-Enter the tolerance
+/*
+---Out Put--
+Enter Interval [a b]: 1 2
+Enter Tolerance:
 0.0001
-1.324738 is an approximate root of f(x)
-Functional value of f(x)at 1.324738 is 0.000084
+The root of f(x) is 1.324738
+Functional value of f(x) is 0.000084
 Number of iteration is 15
 
-Process returned 0 (0x0)   execution time : 11.111 s
+Process returned 0 (0x0)   execution time : 17.889 s
 Press any key to continue.
------------------------------------
-*/
-
-
-/*Solve hints:
-
--Sub function build
--Main Function build:
-        .variable declaration and take interval value
-        .check the root by using "if"
-         => f(a)*f(b)=0 then we can find root 'a' or 'b'
-         => f(a)*f(b)<0 then need tolerance and use "while loop"
-         Here, m =(a+b)/2 => f(a)*f(m)<0 b=m else a=m
-         Now check, h=fabs(a-b)<tolerance to stop the loop
--Print OutPut
 
 */
 
 ```
 
 1(b) This program can find a root of given equation by
-**false position method**. Given equation is : x3-2x-5=0
+**false position method**.
 
 ```c
 #include <stdio.h>
@@ -107,91 +105,64 @@ float f(float x){
     return pow(x, 3) - 2*x - 5;
 }
 
-int main() {
-    float a, b, m, tol, h;
-    int i = 0, max_iteration = 1000;
+int main(){
+    float a,b,h,t,m;
+    int i=0;
 
-    printf("Enter interval [a, b]: ");
-    scanf("%f %f", &a, &b);
+    printf("Enter Interval [a b]: ");
+    scanf("%f%f", &a, &b);
 
-    // Case: Root present at boundary
+    // Check if any endpoint is exactly a root
     if(f(a) * f(b) == 0){
         if(f(a) == 0 && f(b) == 0)
-            printf("Both are roots: a = %.6f, b = %.6f\n", a, b);
+            printf("Both are root of f(x): a =%f , b =%f \n", a,b);
         else if(f(a) == 0)
-            printf("Root is: %.6f\n", a);
+            printf("The root of f(x): a  =%f\n", a);
         else
-            printf("Root is: %.6f\n", b);
-
+            printf("The root of f(x): b  =%f\n", b);
         return 0;
     }
+    else if(f(a) * f(b) < 0){
+        printf("Enter Tolerance: \n");
+        scanf("%f", &t);
 
-    // Case: No root in interval
-    if(f(a) * f(b) > 0){
-        printf("No real root in [%f, %f]\n", a, b);
-        return 0;
+        do{
+            i++;
+            m = (a*f(b)-b*f(a))/(f(b)-f(a));
+            h = fabs(m-a);
+            if(f(a) * f(m) < 0)
+                b = m;
+            else
+                a = m;
+        } while(h > t);
+
+        printf("The root of f(x) is %f\n", m);
+        printf("Functional value of f(x) is %f\n",f(m));
+        printf("Number of iteration is %d\n",i);
     }
 
-    // Accept tolerance
-    printf("Enter tolerance: ");
-    scanf("%f", &tol);
-
-    // False Position iterations
-    do {
-        m = (a * f(b) - b * f(a)) / (f(b) - f(a)); // false position formula
-        h = fabs(m - a);  // interval contraction
-
-        if(f(a) * f(m) > 0)
-            a = m;
-        else
-            b = m;
-
-        i++;
-        if(i > max_iteration){
-            printf("Stopped! Maximum iteration reached.\n");
-            break;
-        }
-
-    } while(h > tol);
-
-    printf("Approximate Root = %.6f\n", m);
-    printf("f(%.6f) = %.6f\n",m,f(m));
-    printf("Iterations = %d\n", i);
+    else
+     printf("The root is not possible in this interval.\n");
 
     return 0;
 }
 
 /*
-Enter interval [a, b]: 2 3
-Enter tolerance: 0.001
-Approximate Root = 2.094306
-f(2.094306) = -0.002745
-Iterations = 6
+Enter Interval [a b]: 2 3
+Enter Tolerance:
+0.001
+The root of f(x) is 2.094306
+Functional value of f(x) is -0.002745
+Number of iteration is 6
 
-Process returned 0 (0x0)   execution time : 7.000 s
+Process returned 0 (0x0)   execution time : 5.095 s
 Press any key to continue.
-
 */
 
-/*Solve hints:
-
--Sub function build
--Main Function build:
-        .variable declaration and take interval value
-        .check the root by using "if"
-         => f(a)*f(b)=0 then we can find root 'a' or 'b'
-         => f(a)*f(b)>0 no real root
-         => then need tolerance and use "do while loop"
-         Here, m =((a * f(b) - b * f(a)) / (f(b) - f(a)) and  h=fabs(m-a)
-        Thus, f(a)*f(m)>0 a=m else b=m then i++ and check i>max iteration
-         Now check, h>tolerance to stop the loop
--Print OutPut
-
-*/
 ```
 
 1(c) This program can find a root of given equation by
-**Newton Raphsan method**. Given equation is : x3-3x-5=0
+**Newton Raphsan method**.
 
 ```c
 #include <stdio.h>
@@ -616,10 +587,11 @@ Press any key to continue.
 
 3(a) First Derivative
 
+## Common form for sum => d/du(u(u-1)(u-2)(u-3)..../n!)
+
 ```c
 #include <stdio.h>
 #include <math.h>
-
 
 int main() {
     int n, i, j;

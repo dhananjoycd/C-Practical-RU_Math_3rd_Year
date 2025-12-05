@@ -1,80 +1,48 @@
 #include <stdio.h>
 #include <math.h>
 
-// Original equation: x^3 + x^2 - 1 = 0
-float f(float x)
-{
-    return (pow(x, 3) + pow(x, 2) - 1);
+float f(float x){
+return (cos(x)-x*exp(x));
 }
 
-// Iteration function g(x) = 1 / sqrt(x + 1)
-float g(float x)
-{
-    return (1.0 / sqrt(x + 1));
+float g(float x){
+return(cos(x)*exp(-x));
 }
 
-// g'(x)
-float gprime(float x)
-{
-    return (-0.5 * pow(x + 1, -1.5));
+float gp(float x){
+return(-exp(-x)*(sin(x)+cos(x)));
 }
 
-int main()
-{
-    float x, x1, tol, h;
-    int i = 0;
 
-    printf("Enter initial guess x = ");
-    scanf("%f", &x);
+int main(){
+float x,x1,h,t;
+int i=0;
 
-    // Check convergence condition |g'(x)| < 1
-    if (fabs(gprime(x)) >= 1)
-    {
-        printf("The given initial guess is NOT suitable.\n");
-        return 0;
-    }
+printf("Initial guess: ");
+scanf("%f",&x);
 
-    printf("Enter tolerance: ");
-    scanf("%f", &tol);
-
-    printf("\n Iteration results:\n");
-    printf("Iteration \t x\n");
-
-    do
-    {
-        i++;
-        x1 = g(x);
-        h = fabs(x - x1);
-        printf("%d\t    %f\n", i, x1);
-        x = x1;
-    } while (h > tol);
-
-    printf("\n Approximate root = %f \n", x1);
-    printf("The functional value f(%f) = %f\n", x1, f(x1));
-    printf("Total iterations = %d\n",i);
-
+if(fabs(gp(x)>=1)){
+    printf("Root doesn't exit");
     return 0;
 }
 
-/*
-Enter initial guess x =
-0.5
-Enter tolerance: 0.0001
+printf("Enter tolarence: ");
+scanf("%f",&t);
 
- Iteration results:
-Iteration          x
-1       0.816497
-2       0.741964
-3       0.757671
-4       0.754278
-5       0.755007
-6       0.754850
-7       0.754884
+printf("Iteration Result: \n");
+printf("Iteration \t x\n");
 
- Approximate root = 0.754884
-The functional value f(0.754884) = 0.000019
-Total iterations = 7
+do{
+    i++;
+    x1=g(x);
+    h=fabs(x-x1);
+    printf("%d \t \t%f \n", i, x1);
+    x=x1;
+}while(h>t);
 
-Process returned 0 (0x0)   execution time : 33.668 s
-Press any key to continue.
-*/
+printf("total iteration: %d \n", i);
+printf("Iteration result: %f \n", x1);
+printf("Functional Value f(%f) = %f \n", x1, f(x1));
+
+return 0;
+}
