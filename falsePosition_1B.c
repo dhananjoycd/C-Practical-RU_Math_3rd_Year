@@ -30,12 +30,10 @@ int main(){
             i++;
             m = (a*f(b)-b*f(a))/(f(b)-f(a));
             h = fabs(m-a);
-
             if(f(a) * f(m) < 0)
                 b = m;
             else
                 a = m;
-
         } while(h > t);
 
         printf("The root of f(x) is %f\n", m);

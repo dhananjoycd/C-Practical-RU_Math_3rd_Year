@@ -1,50 +1,63 @@
 #include <stdio.h>
 #include <math.h>
 
-float f(float x){
-    return pow(x, 3) - 2*x - 5;
+float F(float p, int n){
+    float num=1, fact=1;
+    for(int i =0; i<n; i++){
+        num*=p-i;
+        fact*=i+1;
+    }
+    return num/fact;
 }
 
 int main(){
-    float a,b,h,t,m;
-    int i=0;
+int n;
+float x,h,y[20][20],xp,p,sum;
 
-    printf("Enter Interval [a b]: ");
-    scanf("%f%f", &a, &b);
+    printf("Enter number of data points: ");
+    scanf("%d", &n);
 
-    // Check if any endpoint is exactly a root
-    if(f(a) * f(b) == 0){
-        if(f(a) == 0 && f(b) == 0)
-            printf("Both are root of f(x): a =%f , b =%f \n", a,b);
-        else if(f(a) == 0)
-            printf("The root of f(x): a  =%f\n", a);
-        else
-            printf("The root of f(x): b  =%f\n", b);
-        return 0;
-    }
-    else if(f(a) * f(b) < 0){
-        printf("Enter Tolerance: \n");
-        scanf("%f", &t);
+    printf("Enter initial x value: ");
+    scanf("%f", &x);
 
-        do{
-            i++;
-            m = (a*f(b)-b*f(a))/(f(b)-f(a));  // midpoint
-            h = fabs(m-a);                  // interval length
+    printf("Enter common difference h: ");
+    scanf("%f", &h);
 
-            if(f(a) * f(m) < 0)
-                b = m;
-            else
-                a = m;
+     printf("Enter y values:\n");
+     for(int i=0; i<n; i++)
+        scanf("%f", &y[i][0]);
 
-        } while(h > t);
+    printf("Enter value of x to interpolate: ");
+    scanf("%f", &xp);
 
-        printf("The root of f(x) is %f\n", m);
-        printf("Functional value of f(x) is %f\n",f(m));
-        printf("Number of iteration is %d\n",i);
+    for (int col=1; col<n; col++){
+        for(int row=0; row<n-col; row++)
+            y[row][col] = y[row+1][col-1]-y[row][col-1];
     }
 
-    else
-     printf("The root is not possible in this interval.\n");
 
+       //header
+  printf("Index     y");
+     for (int i = 1; i < n; i++)
+        printf("\t   D%dy",i);
+        printf("\n");
+
+    //body
+     for (int i = 0; i < n; i++){
+      printf("%2d   ", i); // index printing
+        for(int j=0; j<n-i; j++ )
+         printf("%8.4f", y[i][j]);
+         printf("\n");
+     }
+
+    // Newton forward interpolation
+     p =(xp-x)/h;
+     sum=y[0][0];
+
+    for (int i = 1; i < n; i++)
+        sum+=F(p,i)*y[0][i];
+
+    printf("\n Interpolated value at x = %.4f is %.4f\n", xp, sum);
     return 0;
+
 }
