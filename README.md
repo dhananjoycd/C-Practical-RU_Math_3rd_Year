@@ -541,13 +541,13 @@ int main() {
     scanf("%f", &xp);
 
     // Lagrange Interpolation Formula
-    for(i = 0; i < n; i++){
-        p = 1;
-        for(j = 0; j < n; j++){
-            if(j != i)
-                p = p * ( (xp - x[j]) / (x[i] - x[j]) );
+  for(i=0; i<n; i++){
+        p=1;
+        for(j=0; j<n; j++){
+            if(i!=j)
+                p*=(xp-x[j])/(x[i]-x[j]);
         }
-        yp = yp + p * y[i];
+        yp+=p*y[i];
     }
 
     printf("\n Interpolated value at x = %.4f is y = %.4f\n", xp, yp);
